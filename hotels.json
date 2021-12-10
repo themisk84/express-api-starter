@@ -1,0 +1,19 @@
+[
+  { "id": 1, "name": "Hilton", "location": "Stockholm" },
+  {
+    "id": 2,
+    "name": "atSix",
+    "location": "Stockholm"
+  },
+  {
+    "id": 3,
+    "name": "Marriot",
+    "location": "Stockholm"
+  },
+
+  {
+    "id": 4,
+    "name": "George V",
+    "location": "Paris"
+  }
+]

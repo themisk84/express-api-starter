@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import data from "./data.json";
+import hotels from "./hotels.json";
 
 console.log(data.length);
 
@@ -18,24 +19,27 @@ app.use(bodyParser.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello world");
+  res.json(hotels);
 });
 
-app.get("/nominations", (req, res) => {
-  res.json(data);
+app.get("/hotels/:id", (req, res) => {
+  let hotelId = req.params.id;
+  const selectedHotel = hotels.find((hotel) => hotel.id === +hotelId);
+  res.json(selectedHotel);
 });
 
-app.get("/year/:year", (req, res) => {
-  const year = req.params.year;
-  const showWon = req.query.won;
-  console.log(showWon);
-  let nominationsOfYear = data.filter((item) => item.year_award === +year);
+app.put("/hotels/:id/location", (req, res) => {
+  let hotelId = req.params.id;
+  const selectedHotel = hotels.find((hotel) => hotel.id === +hotelId);
+  console.log(selectedHotel);
+  const selected = selectedHotel.location === "Athens";
 
-  if (showWon) {
-    nominationsOfYear = nominationsOfYear.filter((movie) => movie.win);
-  }
-
-  res.json(nominationsOfYear);
+  res.json(selected);
+  // const updatedHotel = hottels.find((hotel) => {
+  //   hotel.id === hotelId;
+  // });
+  // const changedLocation = updatedHotel.location === "Athens";
+  // res.json(changedLocation);
 });
 
 // Start the server
